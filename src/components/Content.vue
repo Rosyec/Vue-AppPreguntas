@@ -25,22 +25,26 @@ const getResult = async () => {
 </script>
 
 <template>
-    <div class="content">
+    <div class="container text-center">
         <div>
             <h1>¡Realizar Pregunta!</h1><br>
         </div>
-        <div>
-            <input
-              class="form-control"
-              type="text"
-              name="pregunta"
-              placeholder="No olvides dejar al final de cada pregunta un '?'"
-              v-model="question">
+        <div class="row">
+            <div class="col-md-8">
+
+                <input
+                class="form-control"
+                type="text"
+                name="pregunta"
+                placeholder="No olvides dejar al final de cada pregunta un '?'"
+                v-model="question">
+            </div>
         </div>
-        <div>
-            <!-- <h5 class="mt-3"> {{ question }} </h5> -->
-            <h2 class="mt-3" v-show="result.answer"> {{ result.answer === 'yes' ? 'Si' : 'No' }} </h2>
-            <img class="mt-3" width="300" height="300" v-show="result.image" :src="result.image" alt="">
+        <div class="row">
+            <div class="col-md-10">
+                <h2 class="mt-3" v-show="result.answer"> {{ result.answer === 'yes' ? 'Si' : 'No' }} </h2>
+                <img class="mt-3" width="200" height="200" v-show="result.image" :src="result.image" alt="">
+            </div>
         </div>
     </div>
 </template>
@@ -50,16 +54,15 @@ const getResult = async () => {
     font-family: 'Roboto';
     src: url(../assets/fonts/Roboto-Medium.ttf) format("truetype");
 }
-.content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.container {
     min-height: 90vh;
 }
 
+.row {
+    justify-content: center;
+}
+
 input {
-    width: 500px;
     padding: 0.8em;
     text-align: center;
     border-radius: 999px 999px 999px 999px;
@@ -70,7 +73,6 @@ input {
 
 img {
     border-radius: 999px 999px 999px 999px;
-    box-shadow: 20px 20px 100px 0px rgba(0, 0, 0, 0.3);
 }
 
 * {

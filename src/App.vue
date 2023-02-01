@@ -6,21 +6,16 @@ import Content from "./components/Content.vue"
 
 <template>
   <Navbar></Navbar>
-  <div class="container-fluid 
-              text-center">
+  <div class="container">
     <Content></Content>
   </div>
   <Footer></Footer>
 </template>
 
-<style>
-  *{
-    margin: 0;
-    padding: 0;
-  }
-
-  body {
-    background-color: #4158D0;
-    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+<style scoped>
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 </style>
