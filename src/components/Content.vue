@@ -11,16 +11,33 @@ let result: Ref<Answer> = ref({
 });
 
 watch(question, (value, oldValue) => {
+    console.log(value);
+    console.log(value);
     if ( value.length === 0 ) result.value = { answer: '', forced: false, image: '' };
     if( !value.includes('?') ) return;
-    getResult();
-    
+    console.log(value);
+    handle.getResult();
 });
 
 const getResult = async () => {
-    const answer = await getAnswer();
-    result.value = answer;
+    try {
+        const answer = await getAnswer();
+        result.value = answer;
+    } catch (error) {
+        console.log('Error Simulado: ', error);
+        result.value.answer = 'Fallo la conexion al API';
+        result.value.image = '';        
+    }
 }
+
+const handle = {
+    //Esto es para poder testear si la funcion getResult es llamada.
+  getResult,
+  result
+}
+
+defineExpose({ handle });
+//Exponemos el objeto handle para poderlo testear.
 
 </script>
 
@@ -31,7 +48,6 @@ const getResult = async () => {
         </div>
         <div class="row">
             <div class="col-md-8">
-
                 <input
                 class="form-control"
                 type="text"
@@ -42,7 +58,7 @@ const getResult = async () => {
         </div>
         <div class="row">
             <div class="col-md-10">
-                <h2 class="mt-3" v-show="result.answer"> {{ result.answer === 'yes' ? 'Si' : 'No' }} </h2>
+                <h2 aria-label="answer" class="mt-3" v-show="result.answer"> {{ result.answer === 'yes' ? 'Si' : 'No' }} </h2>
                 <img class="mt-3" width="200" height="200" v-show="result.image" :src="result.image" alt="">
             </div>
         </div>
